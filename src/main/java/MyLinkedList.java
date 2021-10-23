@@ -39,10 +39,7 @@ public class MyLinkedList<E> {
             last = prev;
         } else {
             next.prev = prev;
-            get(index).next = null;
         }
-
-        get(index).item = null;
         size--;
     }
 
@@ -83,7 +80,6 @@ public class MyLinkedList<E> {
             this.next = next;
             this.prev = prev;
         }
-
     }
 }
 
@@ -98,5 +94,8 @@ class MyLinkedListTest{
         System.out.println(list);
         list.remove(0);
         System.out.println(list);
+        list.remove(2);
+        System.out.println(list);
+
     }
 }
