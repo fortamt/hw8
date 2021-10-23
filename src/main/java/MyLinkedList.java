@@ -40,6 +40,23 @@ public class MyLinkedList<E> {
         size--;
     }
 
+    public int size(){
+        return size;
+    }
+
+    void clear(){
+        for(Node<E> x = first; x != null; ){
+            Node<E> next =x.next;
+            x.item = null;
+            x.next = null;
+            x.prev = null;
+            x = next;
+        }
+        first = last = null;
+        size=0;
+
+    }
+
     Node get(int index){
         Node<E> x = first;
         for(int i =0; i < index; i++){
@@ -91,8 +108,13 @@ class MyLinkedListTest{
         System.out.println(list);
         list.remove(0);
         System.out.println(list);
+        System.out.println(list.size());
         list.remove(2);
         System.out.println(list);
+        System.out.println(list.size());
+        list.clear();
+        System.out.println(list);
+        System.out.println(list.size());
 
     }
 }
