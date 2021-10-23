@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-import java.util.List;
 
 public class MyLinkedList<E> {
     int size = 0;
@@ -24,7 +22,6 @@ public class MyLinkedList<E> {
     }
 
     void remove(int index){
-        final E element = (E) get(index).item;
         final Node<E> next = get(index).next;
         final Node<E> prev = get(index).prev;
 
