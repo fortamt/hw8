@@ -19,7 +19,7 @@ public class MyArrayList {
 
     public MyArrayList(){ this.myData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA; }
 
-    public boolean add(Object value){
+    boolean add(Object value){
         size++;
         Object[] temp = new Object[size];
         if(myData.length > 0) {
@@ -32,18 +32,19 @@ public class MyArrayList {
         return true;
     }
 
-    public void remove(int index){
+    void remove(int index){
         this.myData[index] = null;
         trim(this.myData);
+        size--;
     }
 
-    public void clear(){
-        this.myData = new Object[DEFAULT_CAPACITY];
-        trim(this.myData);
+    void clear(){
+        this.myData = null;
+        this.size = 0;
     }
 
-    public int size(){
-        return this.myData.length;
+    int size(){
+        return size;
     }
 
     public Object get(int index){
@@ -78,9 +79,13 @@ public class MyArrayList {
             result = new StringBuilder("[]");
         } else {
             result = new StringBuilder("[");
+            int count = 0;
             for (Object o : myData) {
                 result.append(o);
-                result.append(" ");
+                if (count < this.myData.length-1){
+                    result.append(", ");
+                    count++;
+                }
             }
             result.append("]");
         }
@@ -91,7 +96,7 @@ public class MyArrayList {
 }
 
 
-class Test{
+class MyArrayListTest{
     public static void main(String[] args) {
         MyArrayList my = new MyArrayList();
         my.add("один");
