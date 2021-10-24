@@ -1,5 +1,3 @@
-
-
 public class MyArrayList {
     private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
     private static final Object[] EMPTY_ELEMENTDATA = {};

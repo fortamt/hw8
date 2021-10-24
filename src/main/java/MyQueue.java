@@ -57,13 +57,7 @@ public class MyQueue<E> {
         return (f == null) ? null : f.item;
     }
 
-    Node<E> getNode(int index){
-        Node<E> x = first;
-        for(int i =0; i < index; i++){
-            x=x.next;
-        }
-        return x;
-    }
+
 
     public E poll(){
         E result =peek();
@@ -71,6 +65,13 @@ public class MyQueue<E> {
         return result;
     }
 
+    Node<E> getNode(int index){
+        Node<E> x = first;
+        for(int i =0; i < index; i++){
+            x=x.next;
+        }
+        return x;
+    }
 
 
     @Override

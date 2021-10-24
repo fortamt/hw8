@@ -1,14 +1,12 @@
-public class MyLinkedList<E> {
+import java.util.LinkedList;
+
+public class MyStack<E> {
+
     int size = 0;
-
     Node<E> first;
-
     Node<E> last;
 
-    public MyLinkedList(){
-    }
-
-    void add(E e){
+    public E push(E e){
         final Node<E> l = last;
         final Node<E> newNode = new Node<>(l, e , null);
         last = newNode;
@@ -18,6 +16,7 @@ public class MyLinkedList<E> {
             l.next=newNode;
         }
         size++;
+        return e;
     }
 
     void remove(int index){
@@ -39,10 +38,6 @@ public class MyLinkedList<E> {
         size--;
     }
 
-    public int size(){
-        return size;
-    }
-
     void clear(){
         for(Node<E> x = first; x != null; ){
             Node<E> next =x.next;
@@ -55,12 +50,29 @@ public class MyLinkedList<E> {
         size=0;
     }
 
-    public E get(int index){
-        Node<E> x = first;
-        for(int i =0; i < index; i++){
-            x=x.next;
-        }
-        return x.item;
+    public E peek(){
+        final Node<E> l = last;
+        return (l == null) ? null : l.item;
+    }
+
+    public E pop(){
+        E result = peek();
+        unlinkLast();
+        return result;
+    }
+
+    public int size(){ return size; }
+
+    private void unlinkLast() {
+        final Node<E> prev = last.prev;
+        last.item = null;
+        last.prev = null; // help GC
+        last = prev;
+        if (prev == null)
+            first = null;
+        else
+            prev.next = null;
+        size--;
     }
 
     Node<E> getNode(int index){
@@ -71,8 +83,6 @@ public class MyLinkedList<E> {
         return x;
     }
 
-
-
     @Override
     public String toString(){
         StringBuilder result = new StringBuilder("[");
@@ -80,7 +90,7 @@ public class MyLinkedList<E> {
             result.append("]");
         } else {
             for(int i = 0; i < size; i++){
-                result.append(get(i));
+                result.append(getNode(i).item);
                 if(i != size-1){
                     result.append(", ");
                 } else {
@@ -105,24 +115,23 @@ public class MyLinkedList<E> {
     }
 }
 
-class MyLinkedListTest{
+class MyStackTest{
     public static void main(String[] args) {
-        MyLinkedList<String> list = new MyLinkedList<>();
-        list.add("one");
-        list.add("two");
-        list.add("three");
-        list.add("four");
-        list.add("five");
-        System.out.println(list);
-        list.remove(0);
-        System.out.println(list);
-        System.out.println(list.size());
-        list.remove(2);
-        System.out.println(list);
-        System.out.println(list.size());
-        list.clear();
-        System.out.println(list);
-        System.out.println(list.size());
+        MyStack<String> myStack = new MyStack();
+        myStack.push("one");
+        myStack.push("two");
+        myStack.push("three");
+        myStack.push("four");
+        myStack.push("five");
+        System.out.println(myStack);
+        myStack.remove(1);
+        System.out.println(myStack);
+        System.out.println(myStack.size());
+        System.out.println(myStack.peek());
+        System.out.println(myStack.pop());
+        System.out.println(myStack.size());
+        System.out.println(myStack.pop());
+        System.out.println(myStack.size());
 
     }
 }
