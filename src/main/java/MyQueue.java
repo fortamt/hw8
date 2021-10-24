@@ -1,13 +1,9 @@
+public class MyQueue<E> {
 
-public class MyLinkedList<E> {
     int size = 0;
 
     Node<E> first;
-
     Node<E> last;
-
-    public MyLinkedList(){
-    }
 
     void add(E e){
         final Node<E> l = last;
@@ -40,10 +36,6 @@ public class MyLinkedList<E> {
         size--;
     }
 
-    public int size(){
-        return size;
-    }
-
     void clear(){
         for(Node<E> x = first; x != null; ){
             Node<E> next =x.next;
@@ -56,12 +48,13 @@ public class MyLinkedList<E> {
         size=0;
     }
 
-    public E get(int index){
-        Node<E> x = first;
-        for(int i =0; i < index; i++){
-            x=x.next;
-        }
-        return x.item;
+    public int size(){
+        return size;
+    }
+
+    public E peek(){
+        final Node<E> f = first;
+        return (f == null) ? null : f.item;
     }
 
     Node<E> getNode(int index){
@@ -70,6 +63,12 @@ public class MyLinkedList<E> {
             x=x.next;
         }
         return x;
+    }
+
+    public E poll(){
+        E result =peek();
+        remove(0);
+        return result;
     }
 
 
@@ -81,7 +80,7 @@ public class MyLinkedList<E> {
             result.append("]");
         } else {
             for(int i = 0; i < size; i++){
-                result.append(get(i));
+                result.append(getNode(i).item);
                 if(i != size-1){
                     result.append(", ");
                 } else {
@@ -106,24 +105,20 @@ public class MyLinkedList<E> {
     }
 }
 
-class MyLinkedListTest{
+
+class MyQueueTest{
     public static void main(String[] args) {
-        MyLinkedList<String> list = new MyLinkedList<>();
-        list.add("one");
-        list.add("two");
-        list.add("three");
-        list.add("four");
-        list.add("five");
-        System.out.println(list);
-        list.remove(0);
-        System.out.println(list);
-        System.out.println(list.size());
-        list.remove(2);
-        System.out.println(list);
-        System.out.println(list.size());
-        list.clear();
-        System.out.println(list);
-        System.out.println(list.size());
+        MyQueue<String> queue = new MyQueue<>();
+        queue.add("one");
+        queue.add("two");
+        queue.add("three");
+        queue.add("four");
+        queue.add("five");
+        System.out.println(queue);
+        System.out.println(queue.poll());
+        System.out.println(queue);
+        System.out.println(queue.poll());
+        System.out.println(queue);
 
     }
 }
