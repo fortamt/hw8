@@ -1,6 +1,6 @@
 public class MyArrayList {
-    private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
     private static final Object[] EMPTY_ELEMENTDATA = {};
+    private static final int DEFAULT_CAPACITY = 10;
     private int size;
     Object[] myData;
 
@@ -14,33 +14,35 @@ public class MyArrayList {
         }
     }
 
-    public MyArrayList(){ this.myData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA; }
+    public MyArrayList(){ this.myData = new Object[DEFAULT_CAPACITY]; }
 
-    boolean add(Object value){
-        size++;
-        Object[] temp = new Object[size];
-        if(myData.length > 0) {
-            for (int i = 0; i < this.myData.length; i++) {
-                temp[i] = this.myData[i];
+    public void add(Object value){
+        if(this.myData.length > size){
+            this.myData[size] = value;
+            size++;
+        } else {
+            Object[] temp = this.myData;
+            this.myData = new Object[(int) (this.myData.length*1.5F)];
+            for (int i = 0; i < temp.length; i++) {
+                this.myData[i] = temp[i];
             }
+            this.myData[size] = value;
+            size++;
         }
-        temp[temp.length-1] = value;
-        myData = temp;
-        return true;
     }
 
-    void remove(int index){
+    public void remove(int index){
         this.myData[index] = null;
         trim(this.myData);
         size--;
     }
 
-    void clear(){
-        this.myData = null;
+    public void clear(){
+        this.myData = new Object[DEFAULT_CAPACITY];
         this.size = 0;
     }
 
-    int size(){
+    public int size(){
         return size;
     }
 
@@ -104,7 +106,6 @@ class MyArrayListTest{
         System.out.println(my);
         my.add("четыре");
         System.out.println(my);
-        my.add("пять");
         System.out.println(my);
         my.add("шесть");
         System.out.println(my);
