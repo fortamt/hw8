@@ -54,7 +54,7 @@ public class MyHashMap<K, V> {
     public V get(K key) {
         V value = null;
         for (int i = 0; i < size; i++) {
-            if(getNode(i).hashKey == hash(key)){
+            if(getNode(i).hashKey == hash(key) || getNode(i).key == key){
                 value = getNode(i).value;
             }
         }
@@ -117,17 +117,8 @@ class MyHashMapTest {
         map.put("z", 8);
         map.put("Рыжик", 12);
         map.put("Барсик", 5);
-        System.out.println(map.get("Васька"));
         System.out.println(map.get(null));
-        System.out.println(map);
-        map.remove("Мурзик");
-        System.out.println(map);
-        map.remove("Барсик");
-        System.out.println(map);
-        System.out.println(map.size());
-        map.clear();
-        System.out.println(map);
-        System.out.println(map.size());
+
 
     }
 }
