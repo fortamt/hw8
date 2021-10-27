@@ -1,20 +1,33 @@
 public class MyQueue<E> {
 
+    final int capacity;
     int size = 0;
 
     Node<E> first;
     Node<E> last;
 
+    public MyQueue(){
+        this.capacity = 16;
+    }
+
+    public MyQueue(int capacity){
+        this.capacity = capacity;
+    }
+
     void add(E e){
-        final Node<E> l = last;
-        final Node<E> newNode = new Node<>(l, e , null);
-        last = newNode;
-        if(l == null){
-            first = newNode;
-        } else{
-            l.next=newNode;
+        if(size < capacity) {
+            final Node<E> l = last;
+            final Node<E> newNode = new Node<>(l, e, null);
+            last = newNode;
+            if (l == null) {
+                first = newNode;
+            } else {
+                l.next = newNode;
+            }
+            size++;
+        } else {
+            throw new IllegalArgumentException();
         }
-        size++;
     }
 
     void remove(int index){
